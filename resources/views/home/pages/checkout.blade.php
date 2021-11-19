@@ -65,7 +65,7 @@
                             @php $subtotal+=$total; @endphp
                                 @endforeach
                             @else
-                                echo '<h4 style="color: red">Chưa có sản phẩm nào trong giỏ hàng, vui lòng <a href="{{route('home')}}">thêm sản phẩm</a> để tiến hành thanh toán!!!</h4>';
+                                <h4 style="color: red">Chưa có sản phẩm nào trong giỏ hàng, vui lòng <a href="{{route('home')}}">thêm sản phẩm</a> để tiến hành thanh toán!!!</h4>
                             @endif
                             <div class="order-col">
                                 <div>Shipping</div>

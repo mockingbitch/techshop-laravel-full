@@ -24,8 +24,9 @@ class OrderService
         $this->orderRepo = $orderRepository;
         $this->stockService = $stockService;
     }
-    public function add($request,$subTotal,$code,$carts){
+    public function add($request,$subTotal,$code,$carts,$customerId){
         $order=[
+            'customerId'=>$customerId,
             'customerName'=>$request->customerName,
             'email'=>$request->email,
             'address'=>$request->address,

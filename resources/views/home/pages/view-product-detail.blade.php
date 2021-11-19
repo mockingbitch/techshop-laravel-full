@@ -94,8 +94,12 @@
                                     <span class="qty-down">-</span>
                                 </div>
                             </div>
-                            <button class="add-to-cart-btn" onclick="addCart({{$product->id}})"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ</button>
+                            @if($product->stock->quantity>0)
+                                <button class="add-to-cart-btn" onclick="addCart({{$product->id}})"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ</button>
+                            @elseif($product->stock->quantity<=0)
+                                <button class="add-to-cart-btn" ><i class="fa fa-shopping-cart"></i>Hết hàng</button>
 
+                            @endif
                             <button style="margin: 30px 0px 0px 170px" class="add-to-cart-btn"><a href="{{route('view-cart')}}" style="color: white;font-weight: bold"><i class="fa fa-shopping-cart"></i> Xem giỏ hàng</a></button>
                         </div>
 
@@ -144,16 +148,6 @@
                                 </div>
                             </div>
                             <!-- /tab1  -->
-
-                            <!-- tab2  -->
-                            <!--                        <div id="tab2" class="tab-pane fade in">-->
-                            <!--                            <div class="row">-->
-                            <!--                                <div class="col-md-12">-->
-                            <!--                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>-->
-                            <!--                                </div>-->
-                            <!--                            </div>-->
-                            <!--                        </div>-->
-                            <!-- /tab2  -->
 
                             <!-- tab3  -->
                             <div id="tab3" class="tab-pane fade in">

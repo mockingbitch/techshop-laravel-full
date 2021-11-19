@@ -48,11 +48,13 @@ class CartController extends Controller
     }
     public function addOrder(Request $request){
         $carts = session()->get('cart');
+        $customer = Auth::guard('customer')->user();
+        $customerId = $customer->id;
         if (isset($carts)){
             $checkOut = $this->cartService->checkOut($carts);
             $code = strtoupper(Str::random(10));
             $subTotal = $this->orderService->subTotal($carts);
-            $this->orderService->add($request,$subTotal,$code,$carts);
+            $this->orderService->add($request,$subTotal,$code,$carts,$customerId);
             session()->forget('cart');
         }
         return view('home.pages.thank-you');
