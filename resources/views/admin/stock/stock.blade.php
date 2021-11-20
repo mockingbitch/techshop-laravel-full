@@ -4,7 +4,10 @@
     <!-- Content Header (Page header) -->
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <h3 align="center" style="text-shadow: 1px 1px 5px grey;">Danh sách sản phẩm</h3>
+            <h3 align="center" style="text-shadow: 1px 1px 5px grey;">Quản lý kho</h3>
+            @if(isset($msg))
+                {{$msg}}
+            @endif
             <table class="table table-hover">
                 <thead>
                 <tr>
@@ -12,12 +15,12 @@
                     <th>Tên sản phẩm</th>
                     <th>Trạng thái</th>
                     <th>Giá</th>
-                    <th>Số lượng</th>
                     <th>Hình ảnh</th>
-                    <th>Sửa</th>
-                    <th>Xoá</th>
+                    <th>Số lượng</th>
+                    <th>Cập nhật kho</th>
                 </tr>
                 </thead>
+                <form method="POST" >
                 <tbody>
                 @foreach($products as $product)
                     <tr>
@@ -31,16 +34,13 @@
                             @endif
                         </td>
                         <td>{{number_format($product->productPrice) }} Đ</td>
-                        <td>{{$product->quantity}}</td>
                         <td><img width="100px" src="{{asset('uploads/product/'.$product->productImage)}}" alt=""></td>
-                        <td align="left"><a class="btn btn-success" href="{{route('product.edit',['id' => $product->id])}}"><i class="fas fa-edit"></i></a></td>
-                        <td align="left"><a class="btn btn-danger"
-                                            href="{{route('product.delete',['id' => $product->id])}}"
-                                            onclick="return confirm('Bạn có muốn xoá mục này?');"><i class="far fa-trash-alt"></i>
-                            </a></td>
+                        <td>{{$product->quantity}}</td>
+                        <td align="left"><a class="btn btn-success" href="{{route('stock.update.view',['id'=>$product->productId])}}"><i class="fas fa-edit"></i></a></td>
                     </tr>
                 @endforeach
                 </tbody>
+                </form>
             </table>
         </div>
         {!! $products->links("pagination::bootstrap-4") !!}

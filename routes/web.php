@@ -88,6 +88,8 @@ Route::middleware(['checklogin'])->group(function(){
         //Stock
         Route::prefix('stock')->group(function (){
             Route::get('in-stock',[StockController::class,'index'])->name('stock.index');
+            Route::get('update-stock/{id}',[StockController::class,'update'])->name('stock.update.view');
+            Route::post('update-stock/{id}',[StockController::class,'confirmUpdate'])->name('stock.update');
         });
     });
 });
