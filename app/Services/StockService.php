@@ -7,6 +7,7 @@ use http\Env\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Stock;
 use Illuminate\Support\Facades\Hash;
+use phpDocumentor\Reflection\Types\False_;
 
 
 class StockService
@@ -31,8 +32,23 @@ class StockService
         $product = $this->stockRepo->find($id);
         $quantity = $product->quantity;
         if (isset($request['import']) || isset($request['export'])){
-            $newQuantity = $quantity + $request['import'] - $request['export'];
-            $this->stockRepo->update($id,['quantity'=>$newQuantity]);
+            if ($request['export']<=$quantity){
+                $newQuantity = $quantity + $request['import'] - $request['export'];
+                $this->stockRepo->update($id,['quantity'=>$newQuantity]);
+                $after = $this->stockRepo->find($id);
+                $quantityAfter = $after->quantity;
+                if ($quantityAfter==0){
+                    $this->stockRepo->update($id,['status'=>0]);
+                }else{
+                    $this->stockRepo->update($id,['status'=>1]);
+                }
+                return true;
+            }
+            return false;
+        }
+        else
+        {
+            return false;
         }
     }
 }

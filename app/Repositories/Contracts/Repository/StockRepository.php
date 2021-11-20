@@ -14,7 +14,7 @@ class StockRepository extends BaseRepository implements StockRepositoryInterface
     }
     public function getAllProduct()
     {
-        $result = $this->model->orderBy('id','DESC')->paginate(9);
+        $result = $this->model->orderBy('id','DESC')->paginate(10);
         return $result;
     }
 }
