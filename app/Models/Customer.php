@@ -10,6 +10,7 @@ class Customer extends Model implements AuthenticatableContract
 {
     use HasFactory;
     use Authenticatable;
+
     protected $table = 'customers';
 
     protected $fillable = [

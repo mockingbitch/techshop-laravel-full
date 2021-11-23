@@ -8,6 +8,8 @@ use App\Services\CustomerService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Mail;
+use App\Exports\CustomerExport;
+use Excel;
 class CustomerController extends Controller
 {
     protected $customerService;
@@ -64,5 +66,12 @@ class CustomerController extends Controller
         }else{
             return redirect()->route('home.customer.login')->with('msg','Can not verify your email!');
         }
+    }
+    public function exportExcel(){
+        return Excel::download(new CustomerExport(),'customerlist.xlsx');
+    }
+    public function exportCsv(){
+        return Excel::download(new CustomerExport(),'customerlist.csv');
+
     }
 }

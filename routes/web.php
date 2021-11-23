@@ -40,7 +40,7 @@ Route::prefix('admin')->group(function (){
 Route::middleware(['checklogin'])->group(function(){
     Route::prefix('admin')->group(function (){
         Route::get('index',[AdminController::class,'index'])->name('admin.index');
-        Route::get('/',[AdminController::class,'index'])->name('admin.index');
+        Route::get('/',[AdminController::class,'index']);
         Route::get('/onlyfan',[AdminController::class,'onlyfan'])->name('onlyfan');
         Route::get('/profile',[AdminController::class,'viewProfile'])->name('profile');
 
@@ -75,6 +75,7 @@ Route::middleware(['checklogin'])->group(function(){
             Route::get('delete-product/{id}', [ProductController::class, 'destroy'])->name('product.delete');
             Route::get('edit-product/{id}', [ProductController::class, 'show'])->name('product.edit');
             Route::post('edit-product/{id}', [ProductController::class, 'update']);
+            Route::post('export-file', [ProductController::class,'exportFile'])->name('product.export-file');
         });
 
         //Order
@@ -102,8 +103,10 @@ Route::prefix('customer')->group(function (){
     Route::post('/register',[CustomerController::class,'register'])->name('customer-register');
     Route::get('/verify/{customer}/{token}',[CustomerController::class,'verify'])->name('verify-account');
 });
+Route::get('export-excel',[CustomerController::class,'exportExcel']);
+Route::get('export-csv',[CustomerController::class,'exportCsv']);
 
-Route::get('/',[HomeController::class,'index'])->name('home');
+Route::get('/',[HomeController::class,'index']);
 Route::get('/home',[HomeController::class,'index'])->name('home');
 Route::get('/logout',[HomeController::class,'logout'])->name('customer-logout');
 Route::get('/category/{id}',[HomeController::class,'showCategoryItems'])->name('category');

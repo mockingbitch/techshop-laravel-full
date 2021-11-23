@@ -9,6 +9,7 @@ use App\Repositories\Contracts\RepositoryInterface\CategoryRepositoryInterface;
 use App\Repositories\Contracts\RepositoryInterface\ProductRepositoryInterface;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -83,5 +84,9 @@ class ProductController extends Controller
         $id = $request->query('id');
         $product = $this->productRepo->find($id);
         return response()->json($product);
+    }
+    public function exportFile()
+    {
+        return (new InvoicesExport)->download('invoices.xlsx', \Maatwebsite\Excel\Excel::XLSX);
     }
 }
